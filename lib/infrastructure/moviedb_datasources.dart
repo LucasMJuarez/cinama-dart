@@ -1,7 +1,18 @@
+import 'package:cinemapedia/config/constants/environment.dart';
 import 'package:cinemapedia/domain/datasources/movies_datasource.dart';
 import 'package:cinemapedia/domain/entitties/movie.dart';
+import 'package:dio/dio.dart';
 
 class MoviedbDatasources extends MovieDatasource {
+  final dio = Dio(
+    BaseOptions(
+      baseUrl: 'https://api.themoviedb.org/3',
+      queryParameters: {
+        'api_key': Environment.theMovieDbKey,
+        'language': 'es-ES',
+      },
+    ),
+  );
   @override
   Future<List<Movie>> getNowPlaying({int page = 1}) async {
     return [];
