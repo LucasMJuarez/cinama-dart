@@ -13,9 +13,17 @@ class MoviedbDatasources extends MovieDatasource {
       },
     ),
   );
+
   @override
+  //aca se hace la implementacion de la funcion getNowPlaying
   Future<List<Movie>> getNowPlaying({int page = 1}) async {
-    return [];
+    final response = await dio.get(
+      '/movie/now_playing',
+      queryParameters: {'page': page},
+    );
+
+    final List<Movie> movies = [];
+    return movies;
     // TODO: implement getNowPlaying
     // throw UnimplementedError();
   }
