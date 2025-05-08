@@ -1,6 +1,8 @@
 import 'package:cinemapedia/config/constants/environment.dart';
 import 'package:cinemapedia/domain/datasources/movies_datasource.dart';
 import 'package:cinemapedia/domain/entitties/movie.dart';
+import 'package:cinemapedia/infrastructure/mappers/movie_mapper.dart';
+import 'package:cinemapedia/infrastructure/models/moviedb/moviedb_response.dart';
 import 'package:dio/dio.dart';
 
 class MoviedbDatasources extends MovieDatasource {
@@ -22,9 +24,13 @@ class MoviedbDatasources extends MovieDatasource {
       queryParameters: {'page': page},
     );
 
-    final List<Movie> movies = [];
+    final movieDbResponse = MovieDbResponse.fromJson(response.data);
+
+    final List<Movie> movies =
+        movieDbResponse.results
+            .map((moviedb) => MovieMapper.movieDBToEntity(moviedb))
+            .toList();
+
     return movies;
-    // TODO: implement getNowPlaying
-    // throw UnimplementedError();
   }
 }
