@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import '../../../domain/entitties/movie.dart';
@@ -56,7 +57,7 @@ class _Slice extends StatelessWidget {
                   decoration: BoxDecoration(color: Colors.black12),
                 );
               }
-              return child;
+              return FadeIn(child: child);
             },
           ),
         ),
