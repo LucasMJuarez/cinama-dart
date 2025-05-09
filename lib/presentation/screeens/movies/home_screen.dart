@@ -1,9 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String name = 'home-screen';
   const HomeScreen({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return _HomeView();
+  }
+}
+
+class _HomeView extends ConsumerStatefulWidget {
+  const _HomeView();
+
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends ConsumerState<_HomeView> {
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ref
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Placeholder());
