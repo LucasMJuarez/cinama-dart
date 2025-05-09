@@ -16,7 +16,7 @@ El código define la clase `MoviedbDatasources`, que es una implementación conc
 2. **Método `getNowPlaying`**:  
    El método `getNowPlaying` es una función asíncrona que obtiene la lista de películas "en cartelera" desde la API de TMDb. Su funcionamiento es el siguiente:
    - **Solicitud a la API**: Realiza una solicitud `GET` al endpoint `/movie/now_playing`, pasando el parámetro `page` para soportar la paginación.
-   - **Parseo de la Respuesta**: La respuesta cruda en formato JSON de la API se convierte en un objeto `MovieDbResponse` utilizando el constructor `fromJson`. Esto asume que `MovieDbResponse` es una clase modelo diseñada para representar la estructura de la respuesta de la API.
+   - **Parseo de la Respuesta**: La respuesta cruda en formato JSON de la API se convierte en un objeto `MovieDbResponse` utilizando el constructor `fromJson`. Esto asume que `MovieDbResponse` es una clase modelo diseñada para representar la estructura de la respuesta de la API. 
    - **Mapeo a Entidades de Dominio**: El campo `results` de `MovieDbResponse` (que contiene una lista de datos crudos de películas) se mapea a una lista de entidades `Movie` utilizando el método `MovieMapper.movieDBToEntity`. Esto asegura que los datos cumplan con la estructura de la capa de dominio de la aplicación.
 
 3. **Valor de Retorno**:  
