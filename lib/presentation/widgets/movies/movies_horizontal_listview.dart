@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,17 @@ class MoviesHorizontalListview extends StatelessWidget {
         children: [
           if (title != null || subTitle != null)
             _Title(title: title, subTitle: subTitle),
+
+          Expanded(
+            child: ListView.builder(
+              itemCount: movies.length,
+              scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                return _Slide(movie: movies[index]);
+              },
+            ),
+          ),
         ],
       ),
     );
@@ -51,6 +63,44 @@ class _Title extends StatelessWidget {
               style: const ButtonStyle(visualDensity: VisualDensity.compact),
               child: Text(subTitle!),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+class _Slide extends StatelessWidget {
+  final Movie movie;
+  const _Slide({required this.movie});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 150,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                movie.posterPath,
+                width: 150,
+                height: 200,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress != null) {
+                    return Center(
+                      child: const CircularProgressIndicator(strokeWidth: 2),
+                    );
+                  }
+
+                  return FadeIn(child: child);
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );
