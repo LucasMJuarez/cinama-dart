@@ -2,6 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 
+import '../../../config/helpers/human_formats.dart';
+
 class MoviesHorizontalListview extends StatelessWidget {
   final List<Movie> movies;
   final String? title;
@@ -115,24 +117,35 @@ class _Slide extends StatelessWidget {
           ),
 
           //* rating
-          Row(
-            children: [
-              Icon(
-                Icons.star_half_outlined,
-                size: 15,
-                color: Colors.yellow.shade800,
-              ),
-              const SizedBox(width: 3),
-              Text(
-                '${movie.voteAverage}',
-                style: textStyle.bodySmall?.copyWith(
+          SizedBox(
+            width: 150,
+            child: Row(
+              children: [
+                Icon(
+                  Icons.star_half_outlined,
+                  size: 15,
                   color: Colors.yellow.shade800,
-                  fontSize: 12,
                 ),
-              ),
-              const SizedBox(width: 3),
-              Text('${movie.popularity}'),
-            ],
+                const SizedBox(width: 5),
+                Text(
+                  HumanFormats.number(movie.voteAverage),
+                  style: textStyle.bodySmall?.copyWith(
+                    color: Colors.yellow.shade800,
+                    fontSize: 12,
+                  ),
+                ),
+                const Spacer(),
+                // Text(
+                //   HumanFormats.number(movie.popularity),
+                //   style: textStyle.bodySmall,
+                // ),
+                Text(
+                  HumanFormats.number(movie.popularity),
+                  style: textStyle.bodySmall,
+                ),
+                const SizedBox(width: 5),
+              ],
+            ),
           ),
         ],
       ),
