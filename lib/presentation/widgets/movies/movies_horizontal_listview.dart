@@ -75,11 +75,13 @@ class _Slide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          //* image
           SizedBox(
             width: 150,
             child: ClipRRect(
@@ -100,6 +102,37 @@ class _Slide extends StatelessWidget {
                 },
               ),
             ),
+          ),
+          const SizedBox(height: 5),
+          SizedBox(
+            width: 150,
+            child: Text(
+              movie.title,
+              maxLines: 2,
+              style: textStyle.titleSmall,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+
+          //* rating
+          Row(
+            children: [
+              Icon(
+                Icons.star_half_outlined,
+                size: 15,
+                color: Colors.yellow.shade800,
+              ),
+              const SizedBox(width: 3),
+              Text(
+                '${movie.voteAverage}',
+                style: textStyle.bodySmall?.copyWith(
+                  color: Colors.yellow.shade800,
+                  fontSize: 12,
+                ),
+              ),
+              const SizedBox(width: 3),
+              Text('${movie.popularity}'),
+            ],
           ),
         ],
       ),

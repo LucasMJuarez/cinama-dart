@@ -1,4 +1,3 @@
-import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:cinemapedia/presentation/providers/providers.dart';
 import 'package:cinemapedia/presentation/widgets/widget.dart';
 import 'package:flutter/material.dart';
