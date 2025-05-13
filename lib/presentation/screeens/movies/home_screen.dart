@@ -37,17 +37,57 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
 
     return Scaffold(
-      body: Column(
-        children: [
-          const CustomAppbar(),
-          MoviesSlideshow(movies: slideShowMovies),
-          MoviesHorizontalListview(
-            movies: nowPlayingMovies,
-            title: 'En cines',
-            subTitle: 'Lunes 12',
-            loadNextPage: () {
-              ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
-            },
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            floating: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: CustomAppbar(),
+              titlePadding: EdgeInsets.zero,
+              centerTitle: false,
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+              return Column(
+                children: [
+                  MoviesSlideshow(movies: slideShowMovies),
+                  MoviesHorizontalListview(
+                    movies: nowPlayingMovies,
+                    title: 'En cines',
+                    subTitle: 'Lunes 12',
+                    loadNextPage: () {
+                      ref
+                          .read(nowPlayingMoviesProvider.notifier)
+                          .loadNextPage();
+                    },
+                  ),
+
+                  MoviesHorizontalListview(
+                    movies: nowPlayingMovies,
+                    title: 'Proximamente',
+                    subTitle: 'Lunes 12',
+                    loadNextPage: () {
+                      ref
+                          .read(nowPlayingMoviesProvider.notifier)
+                          .loadNextPage();
+                    },
+                  ),
+                  MoviesHorizontalListview(
+                    movies: nowPlayingMovies,
+                    title: 'Mejores calificadas',
+                    subTitle: 'Desde el 2010',
+                    loadNextPage: () {
+                      ref
+                          .read(nowPlayingMoviesProvider.notifier)
+                          .loadNextPage();
+                    },
+                  ),
+
+                  SizedBox(height: 10),
+                ],
+              );
+            }, childCount: 1),
           ),
         ],
       ),
