@@ -24,7 +24,21 @@ class MoviedbDatasources extends MoviesDatasource {
       queryParameters: {'page': page},
     );
 
-    final movieDBResponse = MovieDbResponse.fromJson(response.data);
+    return _jsonToMovie(response.data);
+  }
+
+  @override
+  Future<List<Movie>> getPopular({int page = 1}) async {
+    final response = await dio.get(
+      '/movie/popular',
+      queryParameters: {'page': page},
+    );
+
+    return _jsonToMovie(response.data);
+  }
+
+  List<Movie> _jsonToMovie(Map<String, dynamic> json) {
+    final movieDBResponse = MovieDbResponse.fromJson(json);
 
     final List<Movie> movies =
         movieDBResponse.results
