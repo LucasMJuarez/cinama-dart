@@ -39,11 +39,18 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
+          const SliverAppBar(
+            floating: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: CustomAppbar(),
+              titlePadding: EdgeInsets.zero,
+              centerTitle: false,
+            ),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               return Column(
                 children: [
-                  const CustomAppbar(),
                   MoviesSlideshow(movies: slideShowMovies),
                   MoviesHorizontalListview(
                     movies: nowPlayingMovies,
