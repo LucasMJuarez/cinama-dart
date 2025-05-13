@@ -30,6 +30,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
     ref.read(popularMoviesProvider.notifier).loadNextPage();
+    ref.read(upcomingMoviesProvider.notifier).loadNextPage();
+    ref.read(topRatedMoviesProvider.notifier).loadNextPage();
   }
 
   @override
@@ -37,6 +39,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final slideShowMovies = ref.watch(moviesSlideshowProvider);
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final popularMovies = ref.watch(popularMoviesProvider);
+    final topRatedMovies = ref.watch(topRatedMoviesProvider);
+    final upcomingMovies = ref.watch(upcomingMoviesProvider);
 
     return Scaffold(
       body: CustomScrollView(
@@ -64,15 +68,12 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                           .loadNextPage();
                     },
                   ),
-
                   MoviesHorizontalListview(
-                    movies: nowPlayingMovies,
+                    movies: upcomingMovies,
                     title: 'Proximamente',
                     subTitle: 'Lunes 12',
                     loadNextPage: () {
-                      ref
-                          .read(nowPlayingMoviesProvider.notifier)
-                          .loadNextPage();
+                      ref.read(upcomingMoviesProvider.notifier).loadNextPage();
                     },
                   ),
                   MoviesHorizontalListview(
@@ -83,7 +84,14 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                       ref.read(popularMoviesProvider.notifier).loadNextPage();
                     },
                   ),
-
+                  MoviesHorizontalListview(
+                    movies: topRatedMovies,
+                    title: '  Mejores calificados',
+                    subTitle: 'Desde el 2010',
+                    loadNextPage: () {
+                      ref.read(topRatedMoviesProvider.notifier).loadNextPage();
+                    },
+                  ),
                   SizedBox(height: 10),
                 ],
               );
