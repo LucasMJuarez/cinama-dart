@@ -14,6 +14,18 @@ final popularMoviesProvider =
       return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
     });
 
+final topRatedMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+      final fetchMoreMovies = ref.watch(movieRepositoryProvider).getTopRated;
+      return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+    });
+
+final upcomingMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+      final fetchMoreMovies = ref.watch(movieRepositoryProvider).getUpcoming;
+      return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+    });
+
 typedef MovieCallback = Future<List<Movie>> Function({int page});
 //defino el caso de uso que va a usar el provider para obtener las peliculas
 
