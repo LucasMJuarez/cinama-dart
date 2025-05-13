@@ -32,8 +32,8 @@ class _MoviesHorizontalListviewState extends State<MoviesHorizontalListview> {
     scrollController.addListener(() {
       //TODO : load next page
       if (widget.loadNextPage == null) return;
-      if (scrollController.position.pixels >=
-          scrollController.position.maxScrollExtent - 500) {
+      if (scrollController.position.pixels + 200 >=
+          scrollController.position.maxScrollExtent) {
         widget.loadNextPage!();
       }
     });
@@ -57,6 +57,7 @@ class _MoviesHorizontalListviewState extends State<MoviesHorizontalListview> {
 
           Expanded(
             child: ListView.builder(
+              controller: scrollController,
               itemCount: widget.movies.length,
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
