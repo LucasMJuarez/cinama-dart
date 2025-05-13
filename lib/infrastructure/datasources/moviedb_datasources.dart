@@ -24,15 +24,7 @@ class MoviedbDatasources extends MoviesDatasource {
       queryParameters: {'page': page},
     );
 
-    final movieDBResponse = MovieDbResponse.fromJson(response.data);
-
-    final List<Movie> movies =
-        movieDBResponse.results
-            .where((moviedb) => moviedb.posterPath != 'no-poster')
-            .map((moviedb) => MovieMapper.movieDBToEntity(moviedb))
-            .toList();
-
-    return movies;
+    return _jsonToMovie(response.data);
   }
 
   @override
@@ -42,7 +34,11 @@ class MoviedbDatasources extends MoviesDatasource {
       queryParameters: {'page': page},
     );
 
-    final movieDBResponse = MovieDbResponse.fromJson(response.data);
+    return _jsonToMovie(response.data);
+  }
+
+  List<Movie> _jsonToMovie(Map<String, dynamic> json) {
+    final movieDBResponse = MovieDbResponse.fromJson(json);
 
     final List<Movie> movies =
         movieDBResponse.results
